@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   const Artist = sequelize.define("Artist", {
@@ -40,26 +40,37 @@ module.exports = (sequelize) => {
   });
 
   Artist.associate = function(models) {
-    Artist.hasMany(models.release, {
-      foreignKey: 'artistId',
+    Artist.hasMany(models.Release, {
+      foreignKey: 'artistID',
       as: 'releases'
     });
 
-    Artist.belongsToMany(models.artist, {
+    Artist.belongsToMany(models.Artist, {
       through: 'RelatedArtists',
-      foreignKey: 'artistId',
+      foreignKey: 'artistID',
       as: 'artists'
     });
+
+    Artist.belongsToMany(models.Artist, {
+      through: 'RelatedArtists',
+      foreignKey: 'relatedartistID',
+      as: 'relatedartists'
+    });
     
-    Artist.belongsToMany(models.artist, {
-      onDelete: 'CASCADE',
+    Artist.belongsToMany(models.Artist, {
       through: 'BandMember',
-      foreignKey: 'artistId',
+      foreignKey: 'artistID',
+      as: 'bandsmember'
+    });
+
+    Artist.belongsToMany(models.Artist, {
+      through: 'BandMember',
+      foreignKey: 'bandID',
       as: 'bands'
     });
 
-    Artist.belongsToMany(models.user, {
-      foreignKey: 'artistId',
+    Artist.belongsToMany(models.User, {
+      foreignKey: 'artistID',
       through: 'UserArtist',
       as: 'followers'
     })

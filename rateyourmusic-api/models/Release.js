@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   const Release = sequelize.define("Release", {
@@ -30,9 +30,39 @@ module.exports = (sequelize) => {
     },
     country: {
       type: Sequelize.STRING
-    }
+    },
     attribute_content:{
-      type: Sequelize.ARRAY(Sequelize.STRING)
+      type: Sequelize.STRING
+    },
+    attribute_release:{
+      type: Sequelize.STRING
+    },
+    attribute_package:{
+      type: Sequelize.STRING
+    },
+    attribute_specs:{
+      type: Sequelize.STRING
+    },
+    attribute_quality:{
+      type: Sequelize.STRING
+    },
+    attribute_speed:{
+      type: Sequelize.STRING
+    },
+    attribute_manufacturing:{
+      type: Sequelize.STRING
+    },
+    attribute_digital_distribution:{
+      type: Sequelize.STRING
+    },
+    recordingdate_from:{
+      type: Sequelize.DATE
+    },
+    recordingdate_to:{
+      type: Sequelize.DATE
+    },
+    languages: {
+      type: Sequelize.STRING
     }
   },
   {
@@ -40,20 +70,36 @@ module.exports = (sequelize) => {
   });
 
   Release.associate = function(models) {
-    Release.belongsTo(models.artist, {
-      foreignKey: 'artistId',
-      as: 'releases'
+    Release.belongsTo(models.Artist, {
+      foreignKey: 'artistID',
+      as: 'artistreleases'
     });
 
-    Release.belongsToMany(models.genre, {
+    Release.belongsToMany(models.Genre, {
       through: 'GenreRelease',
-      foreignKey: 'releaseId',
+      foreignKey: 'releaseID',
       as: 'genres'
     });
 
-    Release.belongTo(models.label {
-      foreignKey: 'labelId',
-      as: 'releases'
+    Release.belongsTo(models.Label, {
+      foreignKey: 'labelID',
+      as: 'labelreleases'
+    });
+
+    Release.hasMany(models.Track, {
+      foreignKey: 'releaseID',
+      as: 'tracks'
+    });
+
+    Release.hasMany(models.Rate, {
+      foreignKey: 'releaseID',
+      as: 'rates'
+    });
+
+    Release.belongsToMany(models.User, {
+      foreignKey: 'releaseID',
+      through: 'UserRelease',
+      as: 'users'
     })
   }
 

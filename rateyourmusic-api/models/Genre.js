@@ -1,4 +1,4 @@
-const { Sequelize } = require("sequelize");
+const { Sequelize, DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
   const Genre = sequelize.define("Genre", {
@@ -18,26 +18,32 @@ module.exports = (sequelize) => {
     },
     aka: {
       type: Sequelize.TEXT
-    }
+    },
     toplevel: {
       type:Sequelize.BOOLEAN
     }
-  }
+  },
   {
     timestamps: true,
   });
 
   Genre.associate = function(models) {
-    Genre.belongsToMany(models.release, {
-      through: 'GenreRelease'
-      foreignKey: 'genreId',
+    Genre.belongsToMany(models.Release, {
+      through: 'GenreRelease',
+      foreignKey: 'genreID',
       as: 'releases'
     });
 
-    Genre.belongsToMany(models.genre, {
-      through: 'ParentChild'
-      foreignKey: 'childId',
-      as: 'subgenres',
+    Genre.belongsToMany(models.Genre, {
+      through: 'ParentChild',
+      foreignKey: 'genrechildID',
+      as: 'genres',
+    })
+
+    Genre.belongsToMany(models.Genre, {
+      through: 'ParentChild',
+      foreignKey: 'genreparentID',
+      as: 'parentgenres',
     })
   }
 

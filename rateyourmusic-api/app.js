@@ -4,13 +4,10 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require("cors");
+const db = require("./models/");
+const models = require('./models/')
 
 var app = express();
-
-const sequelize = new Sequelize('rateyourmusicdb', 'root', 'rymroot', {
-  host: 'localhost',
-  dialect: 'mysql'
-});
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,4 +20,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+models.sequelize
+  .authenticate()
+  .then(function () {
+    console.log('Connection successful');
+  })
+  .catch(function(error) {
+    console.log("Error creating connection:", error);
+  });
+
+models.sequelize.sync()
+
 module.exports = app;
+
