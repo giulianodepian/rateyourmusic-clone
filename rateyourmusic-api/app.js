@@ -30,6 +30,12 @@ models.sequelize
   });
 
 models.sequelize.sync()
+  .then(result => {
+    console.log("Success DB sync");
+  })
+  .catch(err => {
+    console.log(err);
+  });
 
-module.exports = app;
+ module.exports = app;
 
