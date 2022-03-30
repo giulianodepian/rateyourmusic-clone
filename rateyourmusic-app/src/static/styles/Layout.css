@@ -1,0 +1,16 @@
+.rym-menu {
+	height: 42px;
+	box-shadow: 0px 0px 30px black;
+}
+
+.rym-logo {
+	height: 42px;
+	width: 42px;
+	padding-left: 153px;  
+}
+
+.rym-logo-img {
+	object-fit: cover;
+	height: 42px;
+	width: 42px;
+}
