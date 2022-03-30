@@ -1,9 +1,10 @@
 import React from 'react';
+import PageStats from './../components/PageStats'
 
 class Home extends React.Component {
 	render() {
 		return (
-			<h1>Home</h1>
+			<PageStats />
 		)
 	}
 }
