@@ -7,6 +7,7 @@ import NewMusic from "./pages/NewMusic";
 import Genres from "./pages/Genres";
 import Charts from "./pages/Charts";
 import NoPage from "./pages/NoPage";
+import SignUp from "./pages/SignUp";
 import reportWebVitals from './reportWebVitals';
 
 class App extends React.Component {
@@ -19,6 +20,7 @@ class App extends React.Component {
           			<Route path="new-music" element={<NewMusic />} />
           			<Route path="genres" element={<Genres />} />
           			<Route path="charts" element={<Charts />} />
+								<Route path="account/signup" element={<SignUp />} />
           			<Route path="*" element={<NoPage />} />
         		</Route>
       		</Routes>

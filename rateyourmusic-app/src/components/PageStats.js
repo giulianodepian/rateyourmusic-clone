@@ -1,9 +1,10 @@
 import React from 'react';
+import './../static/styles/PageStats.css';
 
 class PageStats extends React.Component {
 	constructor(props) {
   		super(props);
-  		this.state = { 
+  		this.state = {
   			cantArtists: 0,
   			cantReleases: 0,
   			cantLabels: 0,
@@ -23,7 +24,7 @@ class PageStats extends React.Component {
 			})
 		})
 	}
-	
+
 	componentDidMount() {
 		this.fetchGetStats()
 	}
@@ -31,10 +32,24 @@ class PageStats extends React.Component {
 	render() {
 		return(
 			<div class="page-stats">
+				<hr />
 			  <div class="page-stat">
-			    <span class="page-stat-count">{this.state.cantArtists}</span>
-			    Artists
+			    <span class="page-stat-count">{this.state.cantArtists}&nbsp;</span>
+			    Artists&nbsp;
 			  </div>
+				<div class="page-stat">
+					<span class="page-stat-count">{this.state.cantReleases}&nbsp;</span>
+					Releases&nbsp;
+				</div>
+				<div class="page-stat">
+					<span class="page-stat-count">{this.state.cantLabels}&nbsp;</span>
+					Labels&nbsp;
+				</div>
+				<div class="page-stat">
+					<span class="page-stat-count">{this.state.cantRatings}&nbsp;</span>
+					Ratings&nbsp;
+				</div>
+				<hr />
 			</div>
 		)
 	}

@@ -1,0 +1,36 @@
+.desc {
+  height: 150px;
+  padding-top: 50px
+}
+.desc-logo {
+  width: 150px;
+  height: 150px;
+  padding-left: 200px;
+  display: inline-block;
+}
+
+.desc-logo-img {
+  object-fit: cover;
+  width: 150px;
+}
+
+.desc-text {
+  display: inline-block;
+  vertical-align: top;
+  padding-left: 30px;
+  height: 150px;
+  width: 1000px;
+}
+
+.desc-text-title {
+  padding-top: 30px;
+  display: inline-block;
+}
+
+.desc-text-title h1 {
+  font-size: 30px;
+}
+
+.desc-text-title-rym {
+  color: blue;
+}

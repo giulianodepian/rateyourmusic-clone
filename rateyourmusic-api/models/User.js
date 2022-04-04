@@ -34,16 +34,18 @@ module.exports = (sequelize) => {
       }
     },
     hooks: {
-      beforeCreate: function(user) {
-        bcrypt.hash(user.password, 10, function(err, hash) {
-          user.password = hash
-        });
+      beforeCreate: async (user) => {
+         if (user.password) {
+          const salt = await bcrypt.genSaltSync(10, 'a');
+          user.password = bcrypt.hashSync(user.password, salt);
+        }
       },
-      beforeUpdate: function(user) {
-        bcrypt.hash(user.password, 10, function(err, hash) {
-          user.password = hash
-        });
-      }
+      beforeUpdate:async (user) => {
+       if (user.password) {
+        const salt = await bcrypt.genSaltSync(10, 'a');
+        user.password = bcrypt.hashSync(user.password, salt);
+       }
+     },
     }
   });
 
@@ -53,7 +55,7 @@ module.exports = (sequelize) => {
       through: 'UserArtist',
       as: 'artists'
     });
-    
+
     User.hasMany(models.Rate, {
       foreignKey: 'userID',
       as: 'rates'

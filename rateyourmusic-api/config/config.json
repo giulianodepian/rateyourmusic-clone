@@ -1,7 +1,7 @@
 {
   "development": {
     "username": "root",
-    "password": "rymroot",
+    "password": "admin1234",
     "database": "rateyourmusicdb",
     "host": "127.0.0.1",
     "dialect": "mysql"
