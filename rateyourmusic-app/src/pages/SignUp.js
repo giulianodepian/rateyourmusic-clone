@@ -1,6 +1,5 @@
 import React from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button'
+import './../static/styles/SignUp.css';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -10,6 +9,7 @@ class SignUp extends React.Component {
       password: '',
       passwordconfirm: '',
       email: '',
+      message: '',
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -36,41 +36,52 @@ class SignUp extends React.Component {
       body: JSON.stringify(data)
     };
     fetch("http://localhost:9000/signUp", options)
-    .then(data => console.log(data.json()))
+    .then(data => data.json())
+    .then(data => {
+      this.setState({ message: data.message} )
+    })
     .catch(error => {
-      console.log("Fetch Error")
+      console.log(error)
     })
     event.preventDefault();
   }
 
   render() {
+    const message = this.state.message;
     return(
-      <Form onSubmit={this.handleSubmit}>
-        <Form.Group className="mb-3" controlId="formUser">
-          <Form.Label>Username:</Form.Label>
-          <Form.Control name="username" onChange={this.handleChange} type="text" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formPassword">
-          <Form.Label>Enter a password:</Form.Label>
-          <Form.Control name="password" onChange={this.handleChange} type="password" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formPasswordconf">
-          <Form.Label>Type it again</Form.Label>
-          <Form.Control name="passwordconfirm" onChange={this.handleChange} type="password" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formEmail">
-          <Form.Label>Your email address</Form.Label>
-          <Form.Control name="email" onChange={this.handleChange} type="email" />
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          Create Account &#62;&#62;
-        </Button>
-      </Form>
+      <div class="signupform">
+        <p>To begin, please create an account. </p>
+        {message !== '' && message !== "Account Created Successfully" &&
+          <div class="signuperror">
+            <div class="errorstart" />
+            <div class="errormessage">
+              <i class="fa fa-exclamation-triangle"></i>
+              <p> {message} </p>
+            </div>
+          </div>
+        }
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Username:
+            <input type="text" name="username" onChange={this.handleChange} />
+          </label>
+          <label>
+            Enter a password:
+            <input type="password" name="password" onChange={this.handleChange} />
+          </label>
+          <label>
+            Type it again:
+            <input type="password" name="passwordconfirm" onChange={this.handleChange} />
+          </label>
+          <label>
+            Your email address:
+            <input type="email" name="email" onChange={this.handleChange} />
+          </label>
+          <input type="submit" value="Create Account >>" />
+        </form>
+      </div>
     )
   }
 }
 
-export default SignUp
+export default SignUp;

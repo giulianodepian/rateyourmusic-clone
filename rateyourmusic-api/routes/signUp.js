@@ -11,7 +11,7 @@ router.post('/', function(req, res, next){
     .then(user => {
       if (user) {
         console.log("That username is currently in use. Please choose another name.");
-        return res.status(400).send("That username is currently in use. Please choose another name.");
+        return res.status(400).json({ "message": "That username is currently in use. Please choose another name." });
       };
       User.findOne({
         where: {
@@ -21,10 +21,10 @@ router.post('/', function(req, res, next){
         .then(user => {
           if (user) {
             console.log("That email is currently in use. Please choose another email.");
-            return res.status(400).send("That email is currently in use. Please choose another email.")
+            return res.status(400).json({ message: "That email is currently in use. Please choose another email." })
           }
           if (req.body.password != req.body.passwordconfirm) {
-            return res.status(400).send("Passwords don't match.")
+            return res.status(400).json({ message: "Passwords don't match." })
           }
           User.create({
             username: req.body.username,
@@ -32,10 +32,10 @@ router.post('/', function(req, res, next){
             email: req.body.email
           })
             .then(user => {
-              return res.status(200).send("Account Created Successfully");
+              return res.status(200).json({ message: "Account Created Successfully" });
             })
             .catch(err => {
-              return res.status(500).send("Error Creating User");
+              return res.status(500).json({ message: "Error Creating User" });
             })
         })
     })

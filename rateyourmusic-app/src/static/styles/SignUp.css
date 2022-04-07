@@ -1,0 +1,88 @@
+.signupform {
+  margin-left: 30%;
+  margin-top: 10%;
+  padding-top: 1.6em;
+  width: 40%;
+  background-color: #eef3f3;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+  min-height: 15em;
+}
+
+.signupform p {
+  font-family: 'Roboto', sans-serif;
+  margin-left: 1em;
+  margin-bottom: 1em;
+}
+
+.signuperror {
+  margin-left: 1em;
+  margin-bottom: 1em;
+  width: 45em;
+  height: 3.5em;
+}
+
+.errorstart {
+  background: red;
+  height: 3.5em;
+  width: 1em;
+  display: inline-block;
+}
+
+.errormessage {
+  background: #cac8c8;
+  display: inline-block;
+  width: 44em;
+  vertical-align: top;
+  height: 3.5em;
+  line-height: 3.5em;
+}
+
+.errormessage p {
+  display: inline-block;
+  margin-left: 0.5em;
+}
+
+.errormessage i {
+  margin-left: 2em;
+  display: inline-block;
+}
+
+label {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  margin-left: 1em;
+  display: block;
+  height: 1.5em;
+}
+
+input {
+  top: -1.4em;
+  left: 15em;
+  position: relative;
+  display: block;
+}
+
+input[type=submit] {
+  font-weight: bold;
+  margin-left: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-bottom: 0.5em;
+  padding-top: 0.5em;
+  background-color: #b8c0c0;
+  color: #3146ac;
+  margin-top: 5em;
+  position: relative;
+  display: block;
+  left: 0px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: grey;
+}
+
+input[type=submit]:hover {
+  background: #e2dfdf;
+  cursor: pointer;
+}
