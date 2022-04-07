@@ -9,7 +9,7 @@ class SignUp extends React.Component {
       password: '',
       passwordconfirm: '',
       email: '',
-      message: '',
+      messages: [],
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -38,7 +38,7 @@ class SignUp extends React.Component {
     fetch("http://localhost:9000/signUp", options)
     .then(data => data.json())
     .then(data => {
-      this.setState({ message: data.message} )
+      this.setState({ messages: data.messages } )
     })
     .catch(error => {
       console.log(error)
@@ -47,19 +47,24 @@ class SignUp extends React.Component {
   }
 
   render() {
-    const message = this.state.message;
+    const messages = this.state.messages;
+    const errors = messages.map(message => {
+      return (
+      <li>
+        <div class="signuperror">
+          <div class="errorstart" />
+          <div class="errormessage">
+            <i class="fa fa-exclamation-triangle"></i>
+            <p> {message.message} </p>
+          </div>
+        </div>
+      </li>
+      )
+    });
     return(
       <div class="signupform">
         <p>To begin, please create an account. </p>
-        {message !== '' && message !== "Account Created Successfully" &&
-          <div class="signuperror">
-            <div class="errorstart" />
-            <div class="errormessage">
-              <i class="fa fa-exclamation-triangle"></i>
-              <p> {message} </p>
-            </div>
-          </div>
-        }
+        <ul> {errors} </ul>
         <form onSubmit={this.handleSubmit}>
           <label>
             Username:

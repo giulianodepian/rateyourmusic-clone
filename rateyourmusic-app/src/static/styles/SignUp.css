@@ -86,3 +86,7 @@ input[type=submit]:hover {
   background: #e2dfdf;
   cursor: pointer;
 }
+
+ul {
+  list-style: none;
+}
