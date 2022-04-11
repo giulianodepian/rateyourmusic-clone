@@ -8,6 +8,7 @@ import Genres from "./pages/Genres";
 import Charts from "./pages/Charts";
 import NoPage from "./pages/NoPage";
 import SignUp from "./pages/SignUp";
+import Login from "./pages/Login"
 import reportWebVitals from './reportWebVitals';
 
 class App extends React.Component {
@@ -21,6 +22,7 @@ class App extends React.Component {
           			<Route path="genres" element={<Genres />} />
           			<Route path="charts" element={<Charts />} />
 								<Route path="account/signup" element={<SignUp />} />
+								<Route path="account/login" element={<Login />} />
           			<Route path="*" element={<NoPage />} />
         		</Route>
       		</Routes>

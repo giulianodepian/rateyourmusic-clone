@@ -26,13 +26,6 @@ module.exports = (sequelize) => {
   },
   {
     timestamps: true,
-    instanceMethods: {
-      validPassword(password) {
-        bcrypt.compare(password, this.password, function(err, result) {
-          return result
-        })
-      }
-    },
     hooks: {
       beforeCreate: async (user) => {
          if (user.password) {
@@ -48,6 +41,11 @@ module.exports = (sequelize) => {
      },
     }
   });
+
+  User.prototype.validPassword = async function (password) {
+    const result = await bcrypt.compare(password, this.password)
+    return result
+  };
 
   User.associate = function(models) {
     User.belongsToMany(models.Artist, {
